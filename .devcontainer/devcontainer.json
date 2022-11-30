@@ -1,37 +1,41 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.162.0/containers/javascript-node
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm-minikube
 {
-    "name": "kubernetes-tutorial-basic",
-    "build": {
-        "dockerfile": "dockerfile",
-        "args": {
-            "KIND_VERSION": "0.14.0"
-        }
-    },
-    "mounts": [
-        "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock"
-    ],
-    // Set *default* container specific settings.json values on container create.
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/sh"
-    },
-    // Add the IDs of extensions you want installed when the container is created.
-    // "extensions": [
-    //   "dbaeumer.vscode-eslint"
-    // ],
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
-    // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": "yarn install",
-    // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-    "remoteUser": "root"
+	"name": "Kubernetes - Minikube-in-Docker",
+	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:1": {
+			"installZsh": "true",
+			"username": "vscode",
+			"uid": "1000",
+			"gid": "1000",
+			"upgradePackages": "false",
+			"installOhMyZsh": "true",
+			"nonFreePackages": "true"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:1": {
+			"enableNonRootDocker": "true",
+			"username": "vscode",
+			"moby": "true"
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+		"ghcr.io/devcontainers/features/node:1": {},
+		"ghcr.io/devcontainers/features/terraform:1": {},
+		"ghcr.io/dhoeric/features/google-cloud-cli:1": {}
+	},
+	"overrideFeatureInstallOrder": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/devcontainers/features/docker-in-docker",
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube"
+	]
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "kubectl version",
+	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
+	// "postStartCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
+	// Configure tool-specific properties.
+	// "customizations": {},
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
 }
-//Notes:
-// Set site url for wordpress
-// mysql -u exampleuser -p exampledb
-// UPDATE wp_options
-// SET option_value = 'https://docker-development-youtube-series-4rjv9rg7hqrg9-80.githubpreview.dev'
-// WHERE option_name = 'home';
-// UPDATE wp_options
-// SET option_value = 'https://docker-development-youtube-series-4rjv9rg7hqrg9-80.githubpreview.dev'
-// WHERE option_name = 'siteurl';
