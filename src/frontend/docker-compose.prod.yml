@@ -8,12 +8,18 @@ services:
     command: gunicorn dashboardapp.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - ./src/:/usr/src/app/
+      - static_volume:/home/app/web/staticfiles
     expose:
       - 8000
 
   nginx:
     build: ./nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
     ports:
       - 1337:80
     depends_on:
       - front-end
+
+volumes:
+  static_volume:
