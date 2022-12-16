@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  front-end:
+    build:
+      context: src
+      dockerfile: ../Dockerfile.prod
+    command: gunicorn dashboardapp.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./src/:/usr/src/app/
+    expose:
+      - 8000
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 1337:80
+    depends_on:
+      - front-end

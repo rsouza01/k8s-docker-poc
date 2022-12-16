@@ -14,3 +14,9 @@ runserver:
 
 package:
 	docker-compose build
+
+package-prod:
+	docker-compose -f docker-compose.prod.yml build
+
+package-up-prod:
+	docker-compose -f docker-compose.prod.yml up --build
