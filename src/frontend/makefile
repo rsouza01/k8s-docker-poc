@@ -11,3 +11,6 @@ help:
 
 runserver:
 	python ./src/manage.py runserver
+
+package:
+	docker-compose build
